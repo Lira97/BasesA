@@ -57,12 +57,16 @@ app.get('/',function(req,res){
 })
 
 app.post('/producto/add',function(req,res){
-        var tipo =  req.body.tipo
-        var nombre= req.body.nombre
-        var precio= req.body.precio
-        var cantidad= req.body.cantidad
+	console.log(req.body.tipo);
+
+        var tipo =  req.body.tipo;
+        
+        var nombre= req.body.nombre;
+        var precio= req.body.precio;
+        var cantidad= req.body.cantidad;
+        var query = 'CREATE (x:' + tipo + ' {Nombre:"' + nombre + ' ", Cantidad:12, precio:102} ) RETURN x';
         session
-            .run('CREATE (x:{TipoParam} {Nombre:{nombreParam},Cantidad:{CantidadParam},Precio:{PrecioParam}}) RETURN x.nombre',{TipoParam:tipo,nombreParam:nombre,CantidadParam:precio,PrecioParam:cantidad})
+            .run(query)
             .then(function(result){
                 res.redirect('/');
                 session.close();
