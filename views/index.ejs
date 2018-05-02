@@ -1,0 +1,30 @@
+<form method="post" action="/producto/add">
+    <label>Producto tipo</label>
+    <input type="text" name="tipo">
+    <br>
+    <label>Producto nombre</label>
+    <input type="text" name="nombre">
+    <br>
+    <label>Producto casntidad</label>
+    <input type="text" name="cantidad">
+    <br>
+    <label>Producto precio</label>
+    <input type="text" name="precio">
+    <br><br>
+    <input type="submit" name="Submit">
+</form>
+<h1>Materias Primas</h1>
+<ul>
+    <h3>AlimentosCongelados</h3>
+    <% productos.forEach(function(productos){%>
+        <li><%=productos.nombre %> <%=productos.precio %></li>
+      
+    <% }) %>
+</ul>
+<ul>
+    <h3>carnes</h3>
+    <% carnes.forEach(function(carnes){%>
+        <li><%=carnes.nombre %> <%=carnes.precio %></li>
+      
+    <% }) %>
+</ul>
