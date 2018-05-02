@@ -72,7 +72,7 @@ app.post('/producto/add',function(req,res){
             })
 });
 app.listen(3000);
-console.log('servidor node port 3500');
+console.log('servidor node port 3000');
 
  module.exports=app;
 
