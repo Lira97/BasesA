@@ -60,11 +60,10 @@ app.post('/producto/add',function(req,res){
 	console.log(req.body.tipo);
 
         var tipo =  req.body.tipo;
-        
         var nombre= req.body.nombre;
         var precio= req.body.precio;
         var cantidad= req.body.cantidad;
-        var query = 'CREATE (x:' + tipo + ' {Nombre:"' + nombre + ' ", Cantidad:12, precio:102} ) RETURN x';
+        var query = 'CREATE (x:' + tipo + ' {Nombre:"' + nombre + ' ", Cantidad:'+ precio +', precio:'+cantidad+'} ) RETURN x';
         session
             .run(query)
             .then(function(result){
