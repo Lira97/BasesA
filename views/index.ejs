@@ -1,33 +1,62 @@
 <form method="post" action="/producto/add">
     <label>Producto tipo</label>
     <select name="tipo">
-        <option  value="AlimentosCongelados">Congelados</option>
+        <option  value="AlimentosCongelados">Alimentos Congelados</option>
         <option value="Carnes">Carnes</option>
+        <option value="ProductosFrescos">Productos Frescos</option>
+        <option value="ProductosFrescos">Productos Frescos</option>
+        <option value="Lacteos">Lacteos</option>
+        <option value="Otros">Otros</option>
+        <option value="leguminosas">Leguminosas</option>
+        <option value="Basicos">Basicos</option>
     </select>
     <br>
     <label>Producto nombre</label>
     <input type="text" name="nombre">
     <br>
-    <label>Producto casntidad</label>
+    <label>Producto cantidad</label>
     <input type="text" name="cantidad">
     <br>
     <label>Producto precio</label>
     <input type="text" name="precio">
     <br><br>
-    <input type="submit" name="Submit">
+    <input type="submit" name="Subm">
 </form>
 <h1>Materias Primas</h1>
 <ul>
-    <h3>AlimentosCongelados</h3>
-    <% productos.forEach(function(productos){%>
-        <li>Nombre: <%=productos.nombre %> , Cantidad:<%=productos.cantidad %>, Precio:<%=productos.precio %></li>
-      
-    <% }) %>
+    <li>AlimentosCongelados</li>
+    
+        <table style="width:15%">
+            <tr>
+              <th>Nombre</th>
+              <th>Cantidad</th> 
+              <th>Precio</th>
+            </tr>
+            <% productos.forEach(function(productos){%>
+            <tr>
+              <td><%=productos.nombre %></td>
+              <td><%=productos.cantidad %></td> 
+              <td><%=productos.precio %></td>
+            </tr>
+            <% }) %>
+          </table>  
 </ul>
 <ul>
-    <h3>carnes</h3>
-    <% carnes.forEach(function(carnes){%>
-        <li><%=carnes.nombre %> <%=carnes.precio %></li>
-      
-    <% }) %>
+        <li>Carnes</li>
+   
+        <table style="width:15%">
+            <tr>
+              <th>Nombre</th>
+              <th>Cantidad</th> 
+              <th>Precio</th>
+            </tr>
+            <% carnes.forEach(function(carnes){%>
+            <tr>
+              <td><%=carnes.nombre %></td>
+              <td><%=carnes.cantidad %></td> 
+              <td><%=carnes.precio %></td>
+            </tr>
+            <% }) %>
+          </table>  
+   
 </ul>
