@@ -17,11 +17,13 @@ app.use(express.static(path.join(__dirname,'public')));
 var driver = neo4j.driver('bolt://localhost',neo4j.auth.basic('neo4j','qwerty'));
 var session = driver.session();
 
+
 app.get('/',function(req,res){
     session
         .run('MATCH (n:AlimentosCongelados) RETURN n')
         .then(function(result){
             var Productos = [];
+
             result.records.forEach(function(records){
                 Productos.push({
                     id:records._fields[0].identity.low,
@@ -30,6 +32,7 @@ app.get('/',function(req,res){
                     precio:records._fields[0].properties.Precio
                 })
             });
+
             session
              .run('MATCH (n:Carnes) RETURN n')
              .then(function(result2){
@@ -46,18 +49,29 @@ app.get('/',function(req,res){
                     productos:Productos,
                     carnes:CarnesA
                 });
-             })
-             .catch()
-            
+             }).catch();
+
         })
         .catch(function(err){
             console.log(err);
         });
-    
-})
+
+});
+
+app.get('/Mprima',function(req,res){
+  session
+  .run('MATCH (n) RETURN n')
+  .then(function(result){
+    res.status(200).send(result.records);
+    session.close();
+  })
+  .catch(function(result){
+     console.log(err);
+  })
+});
+
 
 app.post('/producto/add',function(req,res){
-	console.log(req.body.tipo);
 
         var tipo =  req.body.tipo;
         var nombre= req.body.nombre;
@@ -71,12 +85,10 @@ app.post('/producto/add',function(req,res){
                 session.close();
             })
             .catch(function(result){
-               console.log(err);
+               //console.log(err);
             })
 });
 app.listen(3000);
 console.log('servidor node port 3000');
 
  module.exports=app;
-
-
