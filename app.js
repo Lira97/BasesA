@@ -3,6 +3,7 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var neo4j = require('neo4j-driver').v1;
+var cors = require('cors');
 
 var app = express();
 
@@ -14,10 +15,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.static(path.join(__dirname,'public')));
 
+// Bases de datos =================================================
 var driver = neo4j.driver('bolt://localhost',neo4j.auth.basic('neo4j','qwerty'));
 var session = driver.session();
 
+// Cors ===============================================================
+var whitelist = ['http://192.168.100.28:4200','http://localhost:4200', 'http://107.170.214.237']
+var corsOptions = {
+  origin: function (origin, callback) {
+    //console.log("orgine: ",origin);
+    if (origin == undefined || whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions));
 
+// Peticiones / Rutas ==================================================
 app.get('/',function(req,res){
     session
         .run('MATCH (n:AlimentosCongelados) RETURN n')
